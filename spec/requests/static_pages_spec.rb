@@ -3,21 +3,21 @@ require 'spec_helper'
 describe "Static pages" do
   let(:base_title) { "Ruby on Rails Tutorial Sample App | " }
 
-#  describe "Check static pages for h1 and title" do
-#    ["Home", "Help", "Contact", "About"].each  do |page|
-#      
-#      it "should have the h1 '#{page}'" do
-#        visit "/static_pages/#{page.downcase}"
-#        page.should have_selector('h1', :text => "#{page}")
-#      end
-#
-#      it "should have the title '#{page}'" do
-#        visit "/static_pages/#{page.downcase}"
-#        page.should have_selector('title',
-#                                  :text => "#{base_title}" + "#{page}")
-#      end
-#    end
-#  end
+  #  describe "Check static pages for h1 and title" do
+  #    ["Home", "Help", "Contact", "About"].each  do |page|
+  #      
+  #      it "should have the h1 '#{page}'" do
+  #        visit "/static_pages/#{page.downcase}"
+  #        page.should have_selector('h1', :text => "#{page}")
+  #      end
+  #
+  #      it "should have the title '#{page}'" do
+  #        visit "/static_pages/#{page.downcase}"
+  #        page.should have_selector('title',
+  #                                  :text => "#{base_title}" + "#{page}")
+  #      end
+  #    end
+  #  end
 
   describe "Home page" do
 
@@ -26,10 +26,15 @@ describe "Static pages" do
       page.should have_selector('h1', :text => 'Sample App')
     end
 
-    it "should have the title 'Home'" do
+    it "should have the base title" do
       visit '/static_pages/home'
       page.should have_selector('title',
-                                :text => "#{base_title}" + "Home")
+                                :text => "Ruby on Rails Tutorial Sample App")
+    end
+
+    it "should not have a custom page title" do
+      visit '/static_pages/home'
+      page.should_not have_selector('title', :text => '| Home')
     end
   end
 
